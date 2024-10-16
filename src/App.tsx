@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import AnimatedBackground from './components/AnimatedBackground';
+import ProfileCard from './components/ProfileCard';
+import IntroBox from './components/IntroBox';
+import SkillsSection from './components/SkillsSection';
+import Timeline from './components/Timeline';
+import Certifications from './components/Certifications';
+import Contact from './components/Contact';
+import FloatingDock from './components/FloatingDock';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App: React.FC = () => (
+  <div className="relative min-h-screen bg-black text-white">
+    <AnimatedBackground />
+    <div className="container mx-auto p-8">
+      <ProfileCard />
+      <IntroBox />
+      <SkillsSection />
+      <Timeline />
+      <Certifications />
+      <Contact />
     </div>
-  );
-}
+    <FloatingDock />
+  </div>
+);
 
 export default App;
