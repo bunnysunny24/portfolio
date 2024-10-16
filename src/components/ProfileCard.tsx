@@ -69,7 +69,7 @@ export const CardBody = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("h-10 w-full", className)}> {/* Decrease height */ }
+    <div className={cn("h-80 w-full", className)}> {/* Decrease height */ }
       {children}
     </div>
   );

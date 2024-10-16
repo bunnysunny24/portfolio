@@ -1,3 +1,5 @@
+import React, { useState } from 'react'; // Import useState along with React
+import './SkillsSection.css';
 const skills = [
   { icon: (
       // Set icon size to 8rem (32 units)
@@ -121,22 +123,65 @@ const skills = [
     ), name: 'PowerShell' 
   },
 ];
+const SkillsSection: React.FC = () => {
+  const [hoveredBoxPosition, setHoveredBoxPosition] = useState({ top: 0, left: 0 });
 
-const SkillsSection: React.FC = () => (
-  <div className="grid grid-cols-4 gap-6 p-6"> {/* Set grid layout with 4 columns and reduced gap */}
-    {skills.map((skill, idx) => (
-      <div
-        key={idx}
-        className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-lg transform transition duration-300 hover:scale-110"
-        style={{ width: '200px', height: '200px' }} // Adjust width if necessary
-      >
-        <div className="flex items-center justify-center mb-1">
-          {skill.icon}
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setHoveredBoxPosition({
+      top: y - 110,
+      left: x - 110,
+    });
+  };
+
+  return (
+    <div className="relative p-6" onMouseMove={handleMouseMove}>
+      {/* Title Box */}
+      <div className="mb-6">
+        <div className="bg-white text-black p-4 rounded-lg shadow-lg flex justify-center items-center transition-transform duration-300 transform group hover:scale-110 font-bold">
+          <span className="transition-transform duration-300 transform group-hover:scale-400 group-hover:font-bold">
+            My Skill Set
+          </span>
         </div>
-        <p className="text-black text-center">{skill.name}</p> {/* Keep text color black */}
       </div>
-    ))}
-  </div>
-);
+
+      {/* Movable box */}
+      <div
+        className="absolute bg-blue-500 opacity-20 rounded-lg"
+        style={{
+          width: '230px',
+          height: '230px',
+          top: `${hoveredBoxPosition.top}px`,
+          left: `${hoveredBoxPosition.left}px`,
+          transition: 'top 0.1s, left 0.1s',
+          pointerEvents: 'none',
+        }}
+      />
+      
+      {/* Skills Grid */}
+      <div className="grid grid-cols-4 gap-6">
+        {skills.map((skill, idx) => (
+          <div
+            key={idx}
+            className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-lg transform transition duration-300 hover:scale-110 hover:shadow-xl"
+            style={{ width: '200px', height: '200px' }}
+          >
+            <div className="flex items-center justify-center mb-1">
+              {skill.icon}
+            </div>
+            <p className="text-black text-center transition-transform duration-300 transform hover:translate-y-[-10px] hover:scale-110">
+              {skill.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default SkillsSection;
