@@ -14,7 +14,7 @@ export const CardContainer = ({
   className,
   containerClassName,
 }: {
-  children?: React.ReactNode;
+  children: (isMouseEntered: boolean) => React.ReactNode; // Expecting a function as children
   className?: string;
   containerClassName?: string;
 }) => {
@@ -49,11 +49,11 @@ export const CardContainer = ({
             "flex items-center justify-center relative transition-all duration-200 ease-linear",
             className,
             {
-              "transform hover:rotate-y-10 hover:scale-105": isMouseEntered, // Add hover effects
+              "transform rotate-2 hover:scale-105": isMouseEntered, // Add hover effects for container
             }
           )}
         >
-          {children}
+          {children(isMouseEntered)} {/* Pass the hover state to children */}
         </div>
       </div>
     </MouseEnterContext.Provider>
@@ -69,7 +69,7 @@ export const CardBody = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("h-10 w-full", className)}> {/* Decrease height */}
+    <div className={cn("h-10 w-full", className)}> {/* Decrease height */ }
       {children}
     </div>
   );
@@ -94,39 +94,32 @@ export const CardItem = ({
   );
 };
 
-// Create a hook to use the context
-export const useMouseEnter = () => {
-  const context = useContext(MouseEnterContext);
-  if (context === undefined) {
-    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
-  }
-  return context;
-};
-
 // ProfileCard component
 const ProfileCard: React.FC = () => {
   return (
     <CardContainer>
-      <CardBody>
-        <CardItem>
-          <div
-            className="bg-white bg-opacity-50 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300" // Decrease height and width
-            style={{
-              backgroundColor: "rgba(255, 255, 255, 0.5)", // Set the white background with transparency
-            }}
-          >
-            {/* Text Box */}
-            <div className="flex flex-col items-center justify-center h-full p-6">
-              <h1 className="text-2xl font-bold text-blue-700 mb-2 transform transition-transform duration-200 ease-in-out group-hover:translate-y-[-20px] group-hover:scale-105"> {/* Decrease font size */}
-                I'm Dachapalli Bhavashesh
-              </h1>
-              <p className="text-lg text-gray-800 transform transition-transform duration-200 ease-in-out group-hover:translate-y-[-10px] group-hover:scale-105"> {/* Decrease font size */}
-                Welcome to my portfolio!
-              </p>
+      {(isMouseEntered) => ( // Receive isMouseEntered as a parameter
+        <CardBody>
+          <CardItem>
+            <div
+              className="bg-white bg-opacity-50 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.5)", // Set the white background with transparency
+              }}
+            >
+              {/* Text Box */}
+              <div className="flex flex-col items-center justify-center h-full p-6">
+                <h1 className={`text-2xl font-bold text-blue-700 mb-2 transition-transform duration-200 ease-in-out ${isMouseEntered ? "rotate-[-6deg]" : "rotate-0"}`}>
+                  I'm Dachapalli Bhavashesh
+                </h1>
+                <p className={`text-lg text-gray-800 transition-transform duration-200 ease-in-out ${isMouseEntered ? "rotate-[-6deg]" : "rotate-0"}`}>
+                  Welcome to my portfolio!
+                </p>
+              </div>
             </div>
-          </div>
-        </CardItem>
-      </CardBody>
+          </CardItem>
+        </CardBody>
+      )}
     </CardContainer>
   );
 };
