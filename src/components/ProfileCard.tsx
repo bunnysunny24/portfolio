@@ -3,10 +3,12 @@
 import { cn } from "../lib/utils"; // Ensure the path is correct
 import React, { createContext, useState, useContext, useRef } from "react";
 
+// Create context for mouse enter state
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined);
 
+// CardContainer component
 export const CardContainer = ({
   children,
   className,
@@ -36,6 +38,7 @@ export const CardContainer = ({
         )}
         style={{
           perspective: "1000px",
+          marginTop: "50px", // Keep the margin to move the container down
         }}
       >
         <div
@@ -44,7 +47,10 @@ export const CardContainer = ({
           onMouseLeave={handleMouseLeave}
           className={cn(
             "flex items-center justify-center relative transition-all duration-200 ease-linear",
-            className
+            className,
+            {
+              "transform hover:rotate-y-10 hover:scale-105": isMouseEntered, // Add hover effects
+            }
           )}
         >
           {children}
@@ -54,6 +60,7 @@ export const CardContainer = ({
   );
 };
 
+// CardBody component
 export const CardBody = ({
   children,
   className,
@@ -62,12 +69,13 @@ export const CardBody = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("h-96 w-full", className)}>
+    <div className={cn("h-10 w-full", className)}> {/* Decrease height */}
       {children}
     </div>
   );
 };
 
+// CardItem component
 export const CardItem = ({
   as: Tag = "div",
   children,
@@ -95,19 +103,27 @@ export const useMouseEnter = () => {
   return context;
 };
 
-// New ProfileCard component
+// ProfileCard component
 const ProfileCard: React.FC = () => {
   return (
     <CardContainer>
       <CardBody>
         <CardItem>
           <div
-            className="bg-white bg-opacity-50 h-96 w-[1200px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            className="bg-white bg-opacity-50 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300" // Decrease height and width
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.5)", // Set the white background with transparency
             }}
           >
-            {/* Additional content can go here */}
+            {/* Text Box */}
+            <div className="flex flex-col items-center justify-center h-full p-6">
+              <h1 className="text-2xl font-bold text-blue-700 mb-2 transform transition-transform duration-200 ease-in-out group-hover:translate-y-[-20px] group-hover:scale-105"> {/* Decrease font size */}
+                I'm Dachapalli Bhavashesh
+              </h1>
+              <p className="text-lg text-gray-800 transform transition-transform duration-200 ease-in-out group-hover:translate-y-[-10px] group-hover:scale-105"> {/* Decrease font size */}
+                Welcome to my portfolio!
+              </p>
+            </div>
           </div>
         </CardItem>
       </CardBody>
