@@ -1,38 +1,118 @@
-import React, { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { useSpring, animated } from '@react-spring/three';
-import { BoxGeometry } from 'three'; // Import BoxGeometry
+"use client";
 
-const ProfileCard: React.FC = () => {
-  const [hovered, setHovered] = useState(false);
+import { cn } from "../lib/utils"; // Ensure the path is correct
+import React, { createContext, useState, useContext, useRef } from "react";
 
-  const { scale } = useSpring({
-    scale: hovered ? 1.1 : 1,
-  });
+const MouseEnterContext = createContext<
+  [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
+>(undefined);
+
+export const CardContainer = ({
+  children,
+  className,
+  containerClassName,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+  containerClassName?: string;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMouseEntered, setIsMouseEntered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsMouseEntered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseEntered(false);
+  };
 
   return (
-    <div className="relative w-64 h-96"> {/* Container for positioning */}
-      <Canvas>
-        <animated.mesh
-          scale={scale}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
+    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+      <div
+        className={cn(
+          "py-20 flex items-center justify-center",
+          containerClassName
+        )}
+        style={{
+          perspective: "1000px",
+        }}
+      >
+        <div
+          ref={containerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={cn(
+            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            className
+          )}
         >
-          <boxGeometry args={[3, 4, 0.5]} /> {/* Increased size */}
-          <meshStandardMaterial color="black" />
-        </animated.mesh>
-      </Canvas>
-      <img 
-        src="https://via.placeholder.com/150" // Placeholder image URL
-        alt="Profile"
-        className="absolute top-2 left-2 w-20 h-20 rounded-full border-4 border-white" // Image styling
-      />
-      <div className="absolute bottom-2 left-2 right-2 bg-white text-black p-2 rounded-md text-center">
-        <p className="text-sm">Your Name</p> {/* First line of text */}
-        <p className="text-sm">Your Title</p> {/* Second line of text */}
+          {children}
+        </div>
       </div>
+    </MouseEnterContext.Provider>
+  );
+};
+
+export const CardBody = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={cn("h-96 w-full", className)}>
+      {children}
     </div>
   );
 };
 
-export default ProfileCard;
+export const CardItem = ({
+  as: Tag = "div",
+  children,
+  className,
+  ...rest
+}: {
+  as?: React.ElementType;
+  children: React.ReactNode;
+  className?: string;
+  [key: string]: any;
+}) => {
+  return (
+    <Tag className={cn("w-full transition duration-200 ease-linear", className)} {...rest}>
+      {children}
+    </Tag>
+  );
+};
+
+// Create a hook to use the context
+export const useMouseEnter = () => {
+  const context = useContext(MouseEnterContext);
+  if (context === undefined) {
+    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
+  }
+  return context;
+};
+
+// New ProfileCard component
+const ProfileCard: React.FC = () => {
+  return (
+    <CardContainer>
+      <CardBody>
+        <CardItem>
+          <div
+            className="bg-white bg-opacity-50 h-96 w-[1200px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.5)", // Set the white background with transparency
+            }}
+          >
+            {/* Additional content can go here */}
+          </div>
+        </CardItem>
+      </CardBody>
+    </CardContainer>
+  );
+};
+
+export default ProfileCard; // Ensure default export
