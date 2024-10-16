@@ -25,10 +25,10 @@ export const TextGenerateEffect = ({
       },
       {
         duration: duration,
-        delay: stagger(0.2),
+        delay: stagger(0.4), // Increased delay to slow down the appearance
       }
     );
-  }, [animate, duration, filter]); // Removed unnecessary dependency
+  }, [animate, duration, filter]);
 
   const renderWords = () => {
     return (

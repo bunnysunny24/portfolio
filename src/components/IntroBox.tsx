@@ -31,7 +31,7 @@ const IntroBox: React.FC = () => {
       > 
         {/* Inner transparent container */}
         <h2 className="text-3xl font-bold text-black">About Me</h2> {/* Heading with black text */}
-        <TextGenerateEffect words={animatedText.trim()} className="mt-4" /> {/* Animated text */}
+        <TextGenerateEffect words={animatedText.trim()} className="mt-4" duration={0.5} /> {/* Use duration for speed */}
       </div>
     </div>
   );
