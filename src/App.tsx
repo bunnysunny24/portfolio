@@ -7,6 +7,7 @@ import { Timeline } from './components/Timeline';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import FloatingDock from './components/FloatingDock';
+import Achievements from './components/Achievements'; // Import the new Achievements component
 
 const App: React.FC = () => (
   <div className="relative min-h-screen bg-black text-white overflow-hidden">
@@ -17,6 +18,7 @@ const App: React.FC = () => (
       <SkillsSection />
       <Timeline />
       <Certifications />
+      <Achievements /> {/* Add the Achievements component here */}
       <Contact />
     </div>
     <FloatingDock />
