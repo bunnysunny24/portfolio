@@ -129,7 +129,6 @@ const SkillsSection: React.FC = () => {
   const handleMouseMove = (e: React.MouseEvent) => {
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
-
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
@@ -140,10 +139,10 @@ const SkillsSection: React.FC = () => {
   };
 
   return (
-    <div className="relative p-6" onMouseMove={handleMouseMove}>
+    <div className="relative p-6" onMouseMove={handleMouseMove} style={{ backgroundColor: '#121212' }}> {/* Black background */}
       {/* Title Box */}
       <div className="mb-6">
-        <div className="bg-white text-black p-4 rounded-lg shadow-lg flex justify-center items-center transition-transform duration-300 transform group hover:scale-110 font-bold">
+        <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg flex justify-center items-center transition-transform duration-300 transform group hover:scale-110 font-bold">
           <span className="transition-transform duration-300 transform group-hover:scale-400 group-hover:font-bold">
             My Skill Set
           </span>
@@ -154,8 +153,8 @@ const SkillsSection: React.FC = () => {
       <div
         className="absolute bg-blue-500 opacity-20 rounded-lg"
         style={{
-          width: '150px', // Reduced size
-          height: '150px', // Reduced size
+          width: '150px',
+          height: '150px',
           top: `${hoveredBoxPosition.top}px`,
           left: `${hoveredBoxPosition.left}px`,
           transition: 'top 0.1s, left 0.1s',
@@ -164,17 +163,17 @@ const SkillsSection: React.FC = () => {
       />
       
       {/* Skills Grid */}
-      <div className="grid grid-cols-5 gap-6"> {/* Adjust the number of columns as needed */}
+      <div className="grid grid-cols-5 gap-6">
         {skills.map((skill, idx) => (
           <div
             key={idx}
-            className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-lg transform transition duration-300 hover:scale-110 hover:shadow-xl"
+            className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl"
             style={{ width: '160px', height: '160px' }} 
           >
             <div className="flex items-center justify-center mb-1">
               {skill.icon}
             </div>
-            <p className="text-black text-center transition-transform duration-300 transform hover:translate-y-[-10px] hover:scale-110">
+            <p className="text-white text-center transition-transform duration-300 transform hover:translate-y-[-10px] hover:scale-110">
               {skill.name}
             </p>
           </div>

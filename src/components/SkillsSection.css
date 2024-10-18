@@ -17,18 +17,27 @@
   .group:hover .group-hover\:font-bold {
     font-weight: bold;
   }
-
-.group:hover {
+  
+  .group:hover {
     box-shadow: 0 0 10px rgba(0, 200, 255, 0.8); /* Glowing effect */
     transform: scale(1.1); /* Scale up the box */
-}
-
-.grid > div:hover {
-    transform: scale(1.1); /* Enlarge skill boxes on hover */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Drop shadow effect */
-}
-
-.bg-white:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on title box */
-    transform: scale(1.05); /* Slightly enlarge title box */
-}
+  }
+  
+  .grid > div:hover {
+    transform: scale(1.05); /* Enlarge skill boxes on hover */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); /* Light shadow effect */
+  }
+  
+  .bg-gray-800:hover {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); /* Shadow effect on skill boxes */
+    transform: scale(1.02); /* Slightly enlarge skill boxes */
+  }
+  
+  .bg-gray-800 {
+    background-color: #1e1e1e; /* Darker background for skill boxes */
+  }
+  
+  .text-white {
+    color: #ffffff; /* White text for better contrast */
+  }
+  
