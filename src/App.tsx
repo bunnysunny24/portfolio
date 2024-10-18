@@ -9,9 +9,9 @@ import Contact from './components/Contact';
 import FloatingDock from './components/FloatingDock';
 
 const App: React.FC = () => (
-  <div className="relative min-h-screen bg-black text-white">
+  <div className="relative min-h-screen bg-black text-white overflow-hidden">
     <AnimatedBackground />
-    <div className="container mx-auto p-8">
+    <div className="relative z-10 container mx-auto p-8">
       <ProfileCard />
       <IntroBox />
       <SkillsSection />

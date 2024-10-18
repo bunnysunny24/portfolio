@@ -1,46 +1,103 @@
-/** @jsxImportSource @emotion/react */
-import { FC } from 'react';
-import { css, keyframes } from '@emotion/react';
+import React, { useRef, useEffect } from 'react';
 
-// Keyframes for a slow, smooth, wavy gradient animation
-const gradientAnimation = keyframes`
-  0% { background-position: 0% 50%; }
-  10% { background-position: 10% 50%; }
-  20% { background-position: 20% 50%; }
-  30% { background-position: 30% 50%; }
-  40% { background-position: 40% 50%; }
-  50% { background-position: 50% 50%; }
-  60% { background-position: 60% 50%; }
-  70% { background-position: 70% 50%; }
-  80% { background-position: 80% 50%; }
-  90% { background-position: 90% 50%; }
-  100% { background-position: 100% 50%; }
-`;
+const AnimatedBackground: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-const AnimatedBackground: FC = () => {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext('2d');
+
+    if (!canvas || !context) return;
+
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const shapes: { x: number; y: number; size: number; speed: number; type: string; color: string }[] = [];
+
+    // Generate random shapes (circles, squares, rectangles)
+    const generateShapes = (numShapes: number) => {
+      for (let i = 0; i < numShapes; i++) {
+        shapes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 30 + 10, // random size between 10 and 40
+          speed: Math.random() * 2 + 0.5, // random speed between 0.5 and 2.5
+          type: ['circle', 'square', 'rectangle'][Math.floor(Math.random() * 3)],
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`, // random color
+        });
+      }
+    };
+
+    generateShapes(50); // Create 50 shapes
+
+    // Animate the shapes
+    const animateShapes = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      shapes.forEach((shape) => {
+        context.fillStyle = shape.color;
+
+        if (shape.type === 'circle') {
+          context.beginPath();
+          context.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
+          context.fill();
+        } else if (shape.type === 'square') {
+          context.fillRect(shape.x, shape.y, shape.size, shape.size);
+        } else if (shape.type === 'rectangle') {
+          context.fillRect(shape.x, shape.y, shape.size * 1.5, shape.size);
+        }
+
+        // Move the shape from left to right
+        shape.x += shape.speed;
+
+        // Reset position when it reaches the right end
+        if (shape.x - shape.size > canvas.width) {
+          shape.x = -shape.size;
+        }
+      });
+
+      requestAnimationFrame(animateShapes);
+    };
+
+    animateShapes();
+
+    // Handle window resize
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Hover scatter effect
+    const handleMouseMove = () => {
+      shapes.forEach((shape) => {
+        shape.x += (Math.random() - 0.5) * 20;
+        shape.y += (Math.random() - 0.5) * 20;
+      });
+    };
+
+    canvas.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
-    <div
-      css={css`
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background: linear-gradient(270deg, 
-          #5b86e5,  /* Soft blue */
-          #36d1dc,  /* Aqua green */
-          #f2c94c,  /* Soft yellow */
-          #ff6a88,  /* Soft red */
-          #f7971e,  /* Orange */
-          #f66b0e,  /* Warm orange */
-          #8E44AD,  /* Purple */
-          #F39C12,  /* Bright yellow-orange */
-          #1ABC9C,  /* Turquoise */
-          #2980B9,  /* Darker blue */
-          #E74C3C,  /* Bright red */
-          #3498DB   /* Light blue */
-        );
-        background-size: 800% 800%; /* Increased size for smoother animation */
-        animation: ${gradientAnimation} 40s ease-in-out infinite; /* Slow and smooth transition */
-      `}
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+        backgroundColor: 'black',
+      }}
     />
   );
 };
