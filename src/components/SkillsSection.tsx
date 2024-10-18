@@ -134,8 +134,8 @@ const SkillsSection: React.FC = () => {
     const y = e.clientY - rect.top;
 
     setHoveredBoxPosition({
-      top: y - 110,
-      left: x - 110,
+      top: y - 80,
+      left: x - 80,
     });
   };
 
@@ -154,8 +154,8 @@ const SkillsSection: React.FC = () => {
       <div
         className="absolute bg-blue-500 opacity-20 rounded-lg"
         style={{
-          width: '230px',
-          height: '230px',
+          width: '150px', // Reduced size
+          height: '150px', // Reduced size
           top: `${hoveredBoxPosition.top}px`,
           left: `${hoveredBoxPosition.left}px`,
           transition: 'top 0.1s, left 0.1s',
@@ -164,12 +164,12 @@ const SkillsSection: React.FC = () => {
       />
       
       {/* Skills Grid */}
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-5 gap-6"> {/* Adjust the number of columns as needed */}
         {skills.map((skill, idx) => (
           <div
             key={idx}
             className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-lg transform transition duration-300 hover:scale-110 hover:shadow-xl"
-            style={{ width: '200px', height: '200px' }}
+            style={{ width: '160px', height: '160px' }} 
           >
             <div className="flex items-center justify-center mb-1">
               {skill.icon}

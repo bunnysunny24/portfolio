@@ -3,7 +3,7 @@ import AnimatedBackground from './components/AnimatedBackground';
 import ProfileCard from './components/ProfileCard';
 import IntroBox from './components/IntroBox';
 import SkillsSection from './components/SkillsSection';
-import Timeline from './components/Timeline';
+import { Timeline } from './components/Timeline';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import FloatingDock from './components/FloatingDock';
