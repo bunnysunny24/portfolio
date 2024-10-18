@@ -153,8 +153,8 @@ const SkillsSection: React.FC = () => {
       <div
         className="absolute bg-blue-500 opacity-20 rounded-lg"
         style={{
-          width: '150px',
-          height: '150px',
+          width: '170px',
+          height: '170px',
           top: `${hoveredBoxPosition.top}px`,
           left: `${hoveredBoxPosition.left}px`,
           transition: 'top 0.1s, left 0.1s',
