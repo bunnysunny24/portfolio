@@ -6,8 +6,18 @@ import SkillsSection from './components/SkillsSection';
 import { Timeline } from './components/Timeline';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
-import FloatingDock from './components/FloatingDock';
-import Achievements from './components/Achievements'; // Import the new Achievements component
+import FloatingDock  from './components/FloatingDock'; // Correctly importing the FloatingDock component
+import Achievements from './components/Achievements';
+import { FaHome, FaClipboardList, FaCertificate, FaTrophy, FaUserGraduate, FaEnvelope } from 'react-icons/fa';
+
+const dockItems = [
+  { title: "Home", icon: <FaHome />, href: "#" },
+  { title: "Skill Set", icon: <FaClipboardList />, href: "#skills" },
+  { title: "Timeline", icon: <FaTrophy />, href: "#timeline" },
+  { title: "Certificates", icon: <FaCertificate />, href: "#certificates" },
+  { title: "Achievements", icon: <FaUserGraduate />, href: "#achievements" },
+  { title: "Contact Me", icon: <FaEnvelope />, href: "#contact" },
+];
 
 const App: React.FC = () => (
   <div className="relative min-h-screen bg-black text-white overflow-hidden">
@@ -18,7 +28,7 @@ const App: React.FC = () => (
       <SkillsSection />
       <Timeline />
       <Certifications />
-      <Achievements /> {/* Add the Achievements component here */}
+      <Achievements />
       <Contact />
     </div>
     <FloatingDock />
