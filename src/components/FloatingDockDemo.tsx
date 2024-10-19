@@ -9,48 +9,67 @@ import {
   IconContact
 } from './icons';
 
-export const FloatingDockDemo: React.FC = () => {
+interface FloatingDockDemoProps {
+  profileRef: React.RefObject<HTMLDivElement>;
+  skillsRef: React.RefObject<HTMLDivElement>;
+  timelineRef: React.RefObject<HTMLDivElement>;
+  certificationsRef: React.RefObject<HTMLDivElement>;
+  achievementsRef: React.RefObject<HTMLDivElement>;
+  contactRef: React.RefObject<HTMLDivElement>;
+}
+
+export const FloatingDockDemo: React.FC<FloatingDockDemoProps> = ({
+  profileRef,
+  skillsRef,
+  timelineRef,
+  certificationsRef,
+  achievementsRef,
+  contactRef
+}) => {
   const links = [
     {
       title: "Home",
       icon: <IconHome />,
-      href: "#home",
+      scrollTo: () => profileRef.current?.scrollIntoView({ behavior: 'smooth' }),
     },
     {
       title: "Skills",
       icon: <IconSkills />,
-      href: "#skills",
+      scrollTo: () => skillsRef.current?.scrollIntoView({ behavior: 'smooth' }),
     },
     {
       title: "Timeline",
       icon: <IconTimeline />,
-      href: "#timeline",
+      scrollTo: () => timelineRef.current?.scrollIntoView({ behavior: 'smooth' }),
     },
     {
       title: "Certifications",
       icon: <IconCertificate />,
-      href: "#certifications",
+      scrollTo: () => certificationsRef.current?.scrollIntoView({ behavior: 'smooth' }),
     },
     {
       title: "Achievements",
       icon: <IconAchievements />,
-      href: "#achievements",
+      scrollTo: () => achievementsRef.current?.scrollIntoView({ behavior: 'smooth' }),
     },
     {
       title: "Contact",
       icon: <IconContact />,
-      href: "#contact",
+      scrollTo: () => contactRef.current?.scrollIntoView({ behavior: 'smooth' }),
     },
   ];
-
-  // Log the links before returning JSX
-  console.log("FloatingDock links: ", links);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center mb-4">
       <FloatingDock
         mobileClassName="translate-y-20" // Only for demo purposes
-        items={links}
+        items={links.map(link => ({
+          ...link,
+          onClick: (e: React.MouseEvent) => {
+            e.preventDefault(); // Prevent default anchor behavior
+            link.scrollTo(); // Call the scroll function
+          }
+        }))}
       />
     </div>
   );

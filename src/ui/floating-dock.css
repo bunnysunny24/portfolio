@@ -22,7 +22,7 @@
     border-radius: 50%;
     color: rgba(255, 255, 255, 0.8); /* Slightly lighter than black for icons */
     text-decoration: none;
-    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+    transition: transform 0.4s ease, background-color 0.4s ease, opacity 0.4s ease; /* Adjusted transition duration and easing */
 }
 
 .floating-dock a:hover {
