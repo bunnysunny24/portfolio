@@ -1,0 +1,37 @@
+.floating-dock {
+    position: fixed;
+    bottom: 30px; /* Position from the bottom */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust to center */
+    display: flex;
+    gap: 10px; /* Space between items */
+    background-color: #000; /* Black background for the dock */
+    padding: 5px; /* Reduced padding for a smaller dock */
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adjust shadow */
+    z-index: 9999; /* Ensure it’s above other elements */
+}
+
+.floating-dock a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;  /* Size of buttons (can be adjusted) */
+    height: 50px; /* Size of buttons (can be adjusted) */
+    background-color: #000; /* Match the button background to the dock */
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.8); /* Slightly lighter than black for icons */
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+}
+
+.floating-dock a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light gray hover effect */
+    transform: scale(1.5) translateY(-10px); /* Scale up and move up slightly more */
+    z-index: 10000; /* Bring the hovered icon to the front */
+}
+
+.floating-dock a {
+    opacity: 1; /* Default opacity */
+    transition: opacity 0.3s ease; /* Transition for opacity */
+}
