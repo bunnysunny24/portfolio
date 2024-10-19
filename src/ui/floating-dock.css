@@ -1,10 +1,10 @@
 .floating-dock {
     position: fixed;
-    bottom: 30px; /* Position from the bottom */
+    bottom: 10px; /* Position from the bottom */
     left: 50%; /* Center it horizontally */
     transform: translateX(-50%); /* Adjust to center */
     display: flex;
-    gap: 10px; /* Space between items */
+    gap: 5px; /* Reduced gap between items for closer spacing */
     background-color: #000; /* Black background for the dock */
     padding: 5px; /* Reduced padding for a smaller dock */
     border-radius: 50px;
@@ -16,22 +16,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;  /* Size of buttons (can be adjusted) */
-    height: 50px; /* Size of buttons (can be adjusted) */
+    width: 60px;  /* Size of buttons */
+    height: 60px; /* Size of buttons */
     background-color: #000; /* Match the button background to the dock */
     border-radius: 50%;
     color: rgba(255, 255, 255, 0.8); /* Slightly lighter than black for icons */
     text-decoration: none;
-    transition: transform 0.4s ease, background-color 0.4s ease, opacity 0.4s ease; /* Adjusted transition duration and easing */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Updated transition duration */
+    opacity: 1; /* Default opacity */
+}
+
+.floating-dock a:not(:hover) {
+    opacity: 0.5; /* Dim the icons that are not hovered */
+    transform: scale(0.8); /* Scale down the icons that are not hovered */
 }
 
 .floating-dock a:hover {
     background-color: rgba(255, 255, 255, 0.1); /* Light gray hover effect */
-    transform: scale(1.5) translateY(-10px); /* Scale up and move up slightly more */
+    transform: scale(1.2); /* Scale up the hovered icon */
     z-index: 10000; /* Bring the hovered icon to the front */
 }
 
-.floating-dock a {
-    opacity: 1; /* Default opacity */
-    transition: opacity 0.3s ease; /* Transition for opacity */
+.floating-dock a svg {
+    width: 30px; /* Size of icons */
+    height: 30px; /* Size of icons */
+    transition: transform 0.5s ease; /* Smooth transition for icon size */
+}
+
+.floating-dock a:hover svg {
+    transform: scale(1.2); /* Scale up the icon on hover */
 }

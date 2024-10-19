@@ -79,7 +79,8 @@ const Contact: React.FC = () => {
           Send Message
         </button>
       </form>
-      <div className="flex justify-center space-x-6 mt-10">
+      {/* Adjusting margin to push icons up and create space at the bottom */}
+      <div className="flex justify-center space-x-6 mt-8 mb-8"> {/* Added mb-8 for space after the icons */}
         <a href="https://www.linkedin.com/in/bhavashesh/" target="_blank" rel="noopener noreferrer">
           <FaLinkedin className="text-6xl hover:text-blue-500 transition duration-300" />
         </a>

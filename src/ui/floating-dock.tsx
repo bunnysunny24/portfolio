@@ -5,7 +5,7 @@ interface FloatingDockProps {
   items: {
     title: string;
     icon: JSX.Element;
-    onClick: (e: React.MouseEvent) => void; // Changed href to onClick
+    onClick: (e: React.MouseEvent) => void; // Function to handle click
   }[];
   mobileClassName?: string; 
 }
@@ -16,9 +16,19 @@ const FloatingDock: React.FC<FloatingDockProps> = ({ items, mobileClassName }) =
             {items.map((item, index) => (
                 <a
                     key={index}
-                    href="#" // Can still keep this for accessibility
+                    href="#"
                     title={item.title}
-                    onClick={item.onClick} // Use onClick from props
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent default anchor behavior
+                      item.onClick(e); // Call the onClick function
+                    }}
+                    role="button" 
+                    tabIndex={0} // Make it focusable for keyboard users
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        item.onClick(e as any); // Trigger onClick on Enter or Space key
+                      }
+                    }}
                 >
                     {item.icon}
                 </a>
