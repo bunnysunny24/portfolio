@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import AnimatedBackground from './components/AnimatedBackground';
+import IntroBox from './components/IntroBox';
 import ProfileCard from './components/ProfileCard';
 import SkillsSection from './components/SkillsSection';
 import { Timeline } from './components/Timeline';
@@ -24,6 +25,7 @@ const App: React.FC = () => {
       <AnimatedBackground />
       <div className="relative z-10 container mx-auto p-8">
         <div ref={profileRef}><ProfileCard /></div>
+        <div><IntroBox /></div> {/* Directly rendering IntroBox */}
         <div ref={skillsRef}><SkillsSection /></div>
         <div ref={timelineRef}><Timeline /></div>
         <div ref={certificationsRef}><Certifications /></div>

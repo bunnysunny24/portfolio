@@ -20,46 +20,34 @@ export const Timeline: React.FC = () => {
   // Content data for the timeline
   const data1: TimelineEntry[] = [
     {
-      title: "Coding Club",
-      content: <p>President at Coding Club. Organized hackathons and coding workshops.</p>,
+      title: "DSA Club - Volunteering",
+      content: <p>Participated in various coding events and mentorship programs, helping fellow students improve their coding skills.</p>,
     },
     {
-      title: "Hackathon Organizer",
-      content: <p>Led the annual university hackathon, which saw over 100 participants.</p>,
+      title: "Committee Member - Hospitality Domain",
+      content: <p>Contributed to organizing events, ensuring guest satisfaction, and managing hospitality services during various college events.</p>,
     },
     {
-      title: "Workshop Speaker",
-      content: <p>Delivered talks on full-stack development and JavaScript frameworks.</p>,
+      title: "Event Organizers",
+      content: <p>Worked as part of the team organizing coding competitions and workshops, fostering a collaborative environment for all participants.</p>,
     },
   ];
 
   const data2: TimelineEntry[] = [
     {
-      title: "Robotics Club",
-      content: <p>Vice President at Robotics Club. Worked on projects involving AI and automation.</p>,
+      title: "Aarshuh Club - Volunteering",
+      content: <p>Engaged in community service projects, helping to raise awareness and support for local charities.</p>,
     },
     {
-      title: "AI Research Project",
-      content: <p>Led a project on AI-based object recognition using deep learning.</p>,
-    },
-    {
-      title: "Automation Workshop",
-      content: <p>Organized workshops on building automated systems with microcontrollers.</p>,
+      title: "Member - External Affairs",
+      content: <p>Involved in outreach programs, building partnerships with other organizations to enhance club visibility and impact.</p>,
     },
   ];
 
   const data3: TimelineEntry[] = [
     {
-      title: "Design Club",
-      content: <p>Lead Designer at Design Club. Managed creative projects and UI/UX design sprints.</p>,
-    },
-    {
-      title: "UI/UX Design Sprint",
-      content: <p>Organized design sprints to improve the user experience of web apps.</p>,
-    },
-    {
-      title: "Creative Director",
-      content: <p>Oversaw a team of 10 designers for the annual club project.</p>,
+      title: "IEEE Society - Web Development Team Member",
+      content: <p>Collaborated with a team to develop and maintain the society's website, ensuring a user-friendly experience and up-to-date information.</p>,
     },
   ];
 
@@ -101,24 +89,24 @@ export const Timeline: React.FC = () => {
   const opacityTransform3 = useTransform(scrollYProgress3, [0, 0.1], [0, 1]);
 
   return (
-    <div className="w-full bg-white dark:bg-neutral-950/80 font-sans md:px-10">
+    <div className="w-full bg-black font-sans md:px-10">
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
+        <h2 className="text-lg md:text-4xl mb-4 text-white max-w-4xl">
           Clubs and Leadership Timelines
         </h2>
-        <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-sm">
+        <p className="text-neutral-300 text-sm md:text-base max-w-sm">
           Here's a timeline of my journey through various clubs and positions I've held.
         </p>
       </div>
       <div className="flex justify-around space-x-8">
-        {/* Timeline 1: Coding Club */}
+        {/* Timeline 1: DSA Club */}
         <div className="w-1/3" ref={containerRef1}>
-          <div ref={ref1} className="relative pb-20 pl-10"> {/* Added pl-4 to push the boxes to the right */}
+          <div ref={ref1} className="relative pb-20 pl-10">
             {data1.map((item, index) => (
               <div key={index} className="flex flex-col gap-10 pt-10">
                 <div className="sticky flex flex-col items-center top-40 self-start">
-                  <div className="h-10 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                    <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+                  <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+                    <div className="h-4 w-4 rounded-full bg-neutral-200 border border-neutral-300 p-2" />
                   </div>
                   <h3 className="text-xl font-bold text-neutral-500">{item.title}</h3>
                 </div>
@@ -132,7 +120,7 @@ export const Timeline: React.FC = () => {
               style={{
                 height: height1 + "px",
               }}
-              className="absolute left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+              className="absolute left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
             >
               <motion.div
                 style={{
@@ -145,14 +133,14 @@ export const Timeline: React.FC = () => {
           </div>
         </div>
 
-        {/* Timeline 2: Robotics Club */}
+        {/* Timeline 2: Aarshuh Club */}
         <div className="w-1/3" ref={containerRef2}>
-          <div ref={ref2} className="relative pb-20 pl-10"> {/* Added pl-4 to push the boxes to the right */}
+          <div ref={ref2} className="relative pb-20 pl-10">
             {data2.map((item, index) => (
               <div key={index} className={`flex flex-col gap-10 pt-10 ${index === 0 ? "mt-32" : ""}`}>
                 <div className="sticky flex flex-col items-center top-40 self-start">
-                  <div className="h-10 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                    <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+                  <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+                    <div className="h-4 w-4 rounded-full bg-neutral-200 border border-neutral-300 p-2" />
                   </div>
                   <h3 className="text-xl font-bold text-neutral-500">{item.title}</h3>
                 </div>
@@ -166,7 +154,7 @@ export const Timeline: React.FC = () => {
               style={{
                 height: height2 + "px",
               }}
-              className="absolute left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+              className="absolute left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
             >
               <motion.div
                 style={{
@@ -179,18 +167,18 @@ export const Timeline: React.FC = () => {
           </div>
         </div>
 
-        {/* Timeline 3: Design Club */}
+        {/* Timeline 3: IEEE Society */}
         <div className="w-1/3" ref={containerRef3}>
-          <div ref={ref3} className="relative pb-20 pl-10"> {/* Added pl-4 to push the boxes to the right */}
+          <div ref={ref3} className="relative pb-20 pl-10">
             {data3.map((item, index) => (
               <div key={index} className="flex flex-col gap-10 pt-10">
                 <div className="sticky flex flex-col items-center top-40 self-start">
-                  <div className="h-10 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                    <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+                  <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+                    <div className="h-4 w-4 rounded-full bg-neutral-200 border border-neutral-300 p-2" />
                   </div>
                   <h3 className="text-xl font-bold text-neutral-500">{item.title}</h3>
                 </div>
-                <div className="relative p-4 bg-white/20 rounded-lg backdrop-blur-lg shadow-lg mb-20">
+                <div className="relative p-4 bg-white/20 rounded-lg backdrop-blur-lg shadow-lg mb-12">
                   {item.content}
                 </div>
               </div>
@@ -200,7 +188,7 @@ export const Timeline: React.FC = () => {
               style={{
                 height: height3 + "px",
               }}
-              className="absolute left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+              className="absolute left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
             >
               <motion.div
                 style={{
@@ -216,5 +204,3 @@ export const Timeline: React.FC = () => {
     </div>
   );
 };
-
-export default Timeline;

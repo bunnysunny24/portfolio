@@ -9,30 +9,74 @@ const Achievements: React.FC = () => {
 
   const achievements = [
     {
-      title: "Achievement 1: Full Stack Web Development",
-      description: "Successfully completed a full stack web development project that included:",
+      title: (
+        <a 
+          href="https://vibeout-alpha.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-white underline hover:text-blue-400"
+        >
+          Vibeout
+        </a>
+      ),
+      description: "Developed an application that analyzes users' emotions through facial expression detection and suggests tailored workout routines and nutrition.",
       points: [
-        "Built a responsive front-end using React and Tailwind CSS.",
-        "Developed a RESTful API with Node.js and Express.",
-        "Implemented user authentication and authorization.",
+        "Used AI and ML to train a model for scanning facial expressions and voice details.",
+        "Employed FastAPI and Google API along with other APIs to process requests.",
+        "Utilized React framework and Tailwind CSS for styling to create the web application.",
+        "For future implementations, will also attach a band for variable things.",
       ],
     },
     {
-      title: "Achievement 2: Data Science Certification",
-      description: "Earned a certification in Data Science that involved:",
+      title: (
+        <a 
+          href="https://os-project-p4gchfbc0-krish-kumars-projects-cfa5e03c.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-white underline hover:text-blue-400"
+        >
+          Survival Game
+        </a>
+      ),
+      description: "Created a game that tracks user IP addresses and enhances player engagement through competitive features.",
       points: [
-        "Completed coursework in Python for data analysis and machine learning.",
-        "Worked on projects involving data visualization with Matplotlib and Seaborn.",
-        "Gained hands-on experience with machine learning algorithms and model evaluation.",
+        "Implemented a leaderboard to track player scores.",
+        "Added user authentication for personalized experiences.",
+        "Introduced dynamic game environments for better engagement.",
       ],
     },
     {
-      title: "Achievement 3: Open Source Contributor",
-      description: "Contributed to several open source projects, including:",
+      title: "Food Waste Consumption App",
+      description: "An app that checks wasted food and gives it to NGOs for distribution to those in need.",
       points: [
-        "Fixed bugs and implemented new features in a popular JavaScript library.",
-        "Participated in code reviews and provided feedback to other contributors.",
-        "Gained experience collaborating with developers from around the world.",
+        "Utilized Java and Swing for app development.",
+        "Integrated Maps API for location services.",
+        "Connected to MySQL database for data management.",
+      ],
+    },
+    {
+      title: "Redbull Hackathon Winner",
+      description: "We developed a project called Vibeout and won the hackathon.",
+      points: [
+        "Collaborated with a team of developers.",
+        "Showcased innovative solutions for emotional wellness.",
+        "Received recognition for outstanding project presentation.",
+      ],
+    },
+    {
+      title: "Sih All India Hackathon",
+      description: "Qualified for the internals and waiting for the next round results.",
+      points: [
+        "Demonstrated exceptional problem-solving skills.",
+        "Collaborated with cross-functional teams.",
+      ],
+    },
+    {
+      title: "Other Hackathons",
+      description: "Participated in various other hackathons held at our university and other universities.",
+      points: [
+        "Gained experience in real-world problem-solving.",
+        "Networked with industry professionals and peers.",
       ],
     },
   ];
@@ -71,7 +115,7 @@ const Achievements: React.FC = () => {
         }}
       >
         <div className="h-full px-4 py-20">
-          <h2 className="text-lg font-semibold mb-4 text-white">Achievements</h2> {/* White text for the title */}
+          <h2 className="text-3xl font-bold mb-4 text-white text-center">Achievements</h2> {/* Increased font size and made it bold */}
           <ul className="list-disc list-inside text-gray-300">
             {achievements.map((ach, index) => (
               <li key={index} className="mb-4">

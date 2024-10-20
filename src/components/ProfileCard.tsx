@@ -93,7 +93,7 @@ export const CardItem = ({
     </Tag>
   );
 };
-
+// ProfileCard component
 // ProfileCard component
 const ProfileCard: React.FC = () => {
   return (
@@ -102,19 +102,28 @@ const ProfileCard: React.FC = () => {
         <CardBody>
           <CardItem>
             <div
-              className="bg-white bg-opacity-50 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className="bg-white bg-opacity-50 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 flex items-center justify-between" // Added flex layout
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.5)", // Set the white background with transparency
               }}
             >
               {/* Text Box */}
-              <div className="flex flex-col items-center justify-center h-full p-6">
+              <div className="flex flex-col items-start justify-center h-full p-6"> {/* Align text to the left */}
                 <h1 className={`text-2xl font-bold text-blue-700 mb-2 transition-transform duration-200 ease-in-out ${isMouseEntered ? "rotate-[-6deg]" : "rotate-0"}`}>
                   I'm Dachapalli Bhavashesh
                 </h1>
                 <p className={`text-lg text-gray-800 transition-transform duration-200 ease-in-out ${isMouseEntered ? "rotate-[-6deg]" : "rotate-0"}`}>
                   Welcome to my portfolio!
                 </p>
+              </div>
+
+              {/* Image on the right */}
+              <div className="flex-shrink-0 mr-8"> {/* Increased margin to push image left */}
+                <img 
+                  src="https://i.ibb.co/qjtb1BG/BNY-SOMA9901-Copy.jpg" 
+                  alt="Dachapalli Bhavashesh" 
+                  className={`h-72 rounded-lg object-cover transition-transform duration-200 ease-in-out ${isMouseEntered ? 'scale-105 rotate-6' : 'scale-100 rotate-0'}`} // Add hover effects to the image
+                />
               </div>
             </div>
           </CardItem>
