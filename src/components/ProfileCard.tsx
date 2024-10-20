@@ -190,7 +190,7 @@ const ProfileCard: React.FC = () => {
               {/* Image on the right */}
               <div className="flex-shrink-0 mr-8">
                 <img 
-                  src="https://i.ibb.co/qjtb1BG/BNY-SOMA9901-Copy.jpg" 
+                  src="https://media.licdn.com/dms/image/v2/D5603AQEgvjoCMPB4Mw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1690910526477?e=1735171200&v=beta&t=IcYb1nt6-lWF9HPaVWdjUQlumohMvzI_b6P7M0GOoJg" 
                   alt="Dachapalli Bhavashesh" 
                   className={`h-72 rounded-lg object-cover transition-transform duration-200 ease-in-out ${isMouseEntered ? 'scale-105 rotate-6' : 'scale-100 rotate-0'}`}
                 />
