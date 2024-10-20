@@ -57,7 +57,7 @@ const AnimatedBackground: React.FC = () => {
     // Use refs to track mouse position
     const mouseX = useRef(0);
     const mouseY = useRef(0);
-    const handSize = 100; // Size of the hand area
+    const handSize = 50; // Size of the hand area
 
     useEffect(() => {
         const canvas = canvasRef.current;

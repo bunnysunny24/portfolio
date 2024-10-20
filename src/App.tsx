@@ -25,12 +25,12 @@ const App: React.FC = () => {
       <AnimatedBackground />
       <div className="relative z-10 container mx-auto p-8">
         <div ref={profileRef}><ProfileCard /></div>
-        <div><IntroBox /></div> {/* Directly rendering IntroBox */}
+        <div><IntroBox /></div> 
         <div ref={skillsRef}><SkillsSection /></div>
         <div ref={timelineRef}><Timeline /></div>
         <div ref={certificationsRef}><Certifications /></div>
         <div ref={achievementsRef}><Achievements /></div>
-        <div ref={contactRef}><Contact /></div>
+        <div ref={contactRef} className="pb-0"><Contact /></div>
       </div>
 
       {/* Ensure Floating Dock is rendered at the bottom */}

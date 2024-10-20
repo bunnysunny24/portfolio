@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "../lib/utils"; // Ensure the path is correct
-import React, { createContext, useState, useContext, useRef } from "react";
+import React, { createContext, useState, useRef } from "react";
 
 // Create context for mouse enter state
 const MouseEnterContext = createContext<
@@ -69,7 +69,7 @@ export const CardBody = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("h-60 w-full", className)}> {/* Decrease height */ }
+    <div className={cn("h-60 w-full", className)}> {/* Decrease height */}
       {children}
     </div>
   );
@@ -93,36 +93,47 @@ export const CardItem = ({
     </Tag>
   );
 };
-// ProfileCard component
+
 // ProfileCard component
 const ProfileCard: React.FC = () => {
+  const [isHovered, setIsHovered] = useState(false); // New state for hover effect
+
   return (
     <CardContainer>
       {(isMouseEntered) => ( // Receive isMouseEntered as a parameter
         <CardBody>
           <CardItem>
             <div
-              className="bg-white bg-opacity-50 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 flex items-center justify-between" // Added flex layout
+              className="bg-gray-800 bg-opacity-80 h-80 w-[1000px] mx-auto -mt-16 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 flex items-center justify-between"
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.5)", // Set the white background with transparency
+                backgroundColor: "rgba(40, 40, 40, 0.8)", // Set the dark background with transparency
               }}
             >
               {/* Text Box */}
-              <div className="flex flex-col items-start justify-center h-full p-6"> {/* Align text to the left */}
-                <h1 className={`text-2xl font-bold text-blue-700 mb-2 transition-transform duration-200 ease-in-out ${isMouseEntered ? "rotate-[-6deg]" : "rotate-0"}`}>
-                  I'm Dachapalli Bhavashesh
-                </h1>
-                <p className={`text-lg text-gray-800 transition-transform duration-200 ease-in-out ${isMouseEntered ? "rotate-[-6deg]" : "rotate-0"}`}>
-                  Welcome to my portfolio!
-                </p>
+              <div className="flex flex-col items-start justify-center h-full p-6">
+                <div 
+                  onMouseEnter={() => setIsHovered(true)} 
+                  onMouseLeave={() => setIsHovered(false)}
+                  className="relative" // Use a relative wrapper to handle the hover state
+                >
+                  <h1 className="text-4xl font-bold text-white mb-2 transition-opacity duration-200 ease-in-out">
+                    {isHovered ? "Hello, I'm bunnysunny24" : "Hello, I'm Dachapalli Bhavashesh"}
+                  </h1>
+                  <p className="text-2xl text-gray-300 mb-2 transition-opacity duration-200 ease-in-out">
+                    Welcome to my portfolio!
+                  </p>
+                  <p className="text-lg text-gray-400 transition-opacity duration-200 ease-in-out">
+                    I am an undergraduate student pursuing a degree in Computer Science and Engineering. Passionate about technology, I specialize in full-stack development, blending creativity with technical expertise to build innovative solutions.
+                  </p>
+                </div>
               </div>
 
               {/* Image on the right */}
-              <div className="flex-shrink-0 mr-8"> {/* Increased margin to push image left */}
+              <div className="flex-shrink-0 mr-8">
                 <img 
                   src="https://i.ibb.co/qjtb1BG/BNY-SOMA9901-Copy.jpg" 
                   alt="Dachapalli Bhavashesh" 
-                  className={`h-72 rounded-lg object-cover transition-transform duration-200 ease-in-out ${isMouseEntered ? 'scale-105 rotate-6' : 'scale-100 rotate-0'}`} // Add hover effects to the image
+                  className={`h-72 rounded-lg object-cover transition-transform duration-200 ease-in-out ${isMouseEntered ? 'scale-105 rotate-6' : 'scale-100 rotate-0'}`}
                 />
               </div>
             </div>

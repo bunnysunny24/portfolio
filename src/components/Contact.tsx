@@ -18,7 +18,6 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Replace with your EmailJS user ID and service/template IDs
     const serviceID = 'service_vs66ajk';
     const templateID = 'template_4z6xcz6';
     const userID = 'gZkqcmsuoiR6xRiJF';
@@ -36,7 +35,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div className="flex flex-col items-center mt-6 mb-10"> {/* Adjusted margin */}
       <form className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md" onSubmit={handleSubmit}>
         <h2 className="text-lg font-semibold mb-4">Contact Me</h2>
         <input
@@ -79,8 +78,7 @@ const Contact: React.FC = () => {
           Send Message
         </button>
       </form>
-      {/* Adjusting margin to push icons up and create space at the bottom */}
-      <div className="flex justify-center space-x-6 mt-8 mb-8"> {/* Added mb-8 for space after the icons */}
+      <div className="flex justify-center space-x-6 mt-6"> {/* Adjusted margin */}
         <a href="https://www.linkedin.com/in/bhavashesh/" target="_blank" rel="noopener noreferrer">
           <FaLinkedin className="text-6xl hover:text-blue-500 transition duration-300" />
         </a>
