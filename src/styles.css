@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Stack items vertically */
+      padding: 16px; /* Adjust padding */
+    }
+  
+    .header {
+      font-size: 24px; /* Adjust header size */
+    }
+  
+    .item {
+      margin-bottom: 16px; /* Space between items */
+    }
+  }

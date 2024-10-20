@@ -12,7 +12,6 @@ import Achievements from './components/Achievements';
 const App: React.FC = () => {
   console.log("App is rendering");
 
-  // Create refs for each section
   const profileRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -23,7 +22,7 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <AnimatedBackground />
-      <div className="relative z-10 container mx-auto p-8">
+      <div className="relative z-10 container mx-auto p-8 md:p-16"> {/* Adjust padding for larger screens */}
         <div ref={profileRef}><ProfileCard /></div>
         <div><IntroBox /></div> 
         <div ref={skillsRef}><SkillsSection /></div>
@@ -32,8 +31,6 @@ const App: React.FC = () => {
         <div ref={achievementsRef}><Achievements /></div>
         <div ref={contactRef} className="pb-0"><Contact /></div>
       </div>
-
-      {/* Ensure Floating Dock is rendered at the bottom */}
       <FloatingDockDemo 
         profileRef={profileRef}
         skillsRef={skillsRef}
