@@ -1,136 +1,108 @@
 import React, { useRef, useEffect } from 'react';
 
+class Snowflake {
+    x: number;
+    y: number;
+    z: number;
+    radius: number;
+    speed: number;
+
+    constructor(canvasWidth: number, canvasHeight: number) {
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
+        this.z = Math.random() * 0.5 + 0.5; // z between 0.5 and 1 for depth
+        this.radius = Math.random() * 2 + 1;
+        this.speed = Math.random() * 1 + 0.5;
+    }
+
+    fall(canvasHeight: number): void {
+        this.y += this.speed / this.z;
+        if (this.y > canvasHeight) {
+            this.y = 0;
+        }
+    }
+
+    draw(ctx: CanvasRenderingContext2D): void {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius / this.z, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${1 - this.z * 0.5})`;
+        ctx.fill();
+    }
+}
+
 const AnimatedBackground: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const shapes: { x: number; y: number; size: number; speed: number; type: string; color: string }[] = [];
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const snowflakes: Snowflake[] = [];
+    const numSnowflakes = 200;
+    let animationId: number | null = null;
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas?.getContext('2d');
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas?.getContext('2d');
 
-    if (!canvas || !context) return;
+        if (!canvas || !ctx) return;
 
-    const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+        const setCanvasSize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
 
-    setCanvasSize(); // Set the initial size of the canvas
+        setCanvasSize(); // Set the initial size of the canvas
 
-    // Generate random shapes (including triangles and pentagons)
-    const generateShapes = (numShapes: number) => {
-      shapes.length = 0; // Clear existing shapes
-      for (let i = 0; i < numShapes; i++) {
-        shapes.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 30 + 10, // random size between 10 and 40
-          speed: Math.random() * 2 + 0.5, // random speed between 0.5 and 2.5
-          type: ['circle', 'square', 'rectangle', 'triangle', 'pentagon'][Math.floor(Math.random() * 5)],
-          color: `hsl(${Math.random() * 360}, 100%, 50%)`, // random color
-        });
-      }
-    };
+        // Create snowflakes
+        const createSnowflakes = (num: number) => {
+            for (let i = 0; i < num; i++) {
+                snowflakes.push(new Snowflake(canvas.width, canvas.height));
+            }
+        };
 
-    generateShapes(50); // Create 50 shapes
+        createSnowflakes(numSnowflakes); // Create snowflakes
 
-    // Function to draw a triangle
-    const drawTriangle = (x: number, y: number, size: number) => {
-      context.beginPath();
-      context.moveTo(x, y - size / 2);
-      context.lineTo(x - size / 2, y + size / 2);
-      context.lineTo(x + size / 2, y + size / 2);
-      context.closePath();
-      context.fill();
-    };
+        // Animate the snowfall
+        const animateSnowflakes = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Function to draw a pentagon
-    const drawPentagon = (x: number, y: number, size: number) => {
-      context.beginPath();
-      for (let i = 0; i < 5; i++) {
-        context.lineTo(
-          x + size * Math.cos((i * 2 * Math.PI) / 5),
-          y + size * Math.sin((i * 2 * Math.PI) / 5)
-        );
-      }
-      context.closePath();
-      context.fill();
-    };
+            snowflakes.forEach((snowflake) => {
+                snowflake.fall(canvas.height);
+                snowflake.draw(ctx);
+            });
 
-    // Animate the shapes
-    const animateShapes = () => {
-      context.clearRect(0, 0, canvas.width, canvas.height);
+            animationId = requestAnimationFrame(animateSnowflakes);
+        };
 
-      shapes.forEach((shape) => {
-        context.fillStyle = shape.color;
+        animateSnowflakes();
 
-        if (shape.type === 'circle') {
-          context.beginPath();
-          context.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
-          context.fill();
-        } else if (shape.type === 'square') {
-          context.fillRect(shape.x, shape.y, shape.size, shape.size);
-        } else if (shape.type === 'rectangle') {
-          context.fillRect(shape.x, shape.y, shape.size * 1.5, shape.size);
-        } else if (shape.type === 'triangle') {
-          drawTriangle(shape.x, shape.y, shape.size);
-        } else if (shape.type === 'pentagon') {
-          drawPentagon(shape.x, shape.y, shape.size);
-        }
+        // Handle window resize
+        const handleResize = () => {
+            setCanvasSize(); // Update canvas size on resize
+        };
 
-        // Move the shape from left to right
-        shape.x += shape.speed;
+        window.addEventListener('resize', handleResize);
 
-        // Reset position when it reaches the right end
-        if (shape.x - shape.size > canvas.width) {
-          shape.x = -shape.size;
-          shape.y = Math.random() * canvas.height; // Reset y position when it wraps around
-        }
-      });
+        return () => {
+            if (animationId !== null) {
+                cancelAnimationFrame(animationId);
+            }
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
-      requestAnimationFrame(animateShapes);
-    };
-
-    animateShapes();
-
-    // Handle window resize
-    const handleResize = () => {
-      setCanvasSize(); // Update canvas size on resize
-      generateShapes(50); // Regenerate shapes to fit new canvas size
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Hover scatter effect
-    const handleMouseMove = () => {
-      shapes.forEach((shape) => {
-        shape.x += (Math.random() - 0.5) * 20;
-        shape.y += (Math.random() - 0.5) * 20;
-      });
-    };
-
-    canvas.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-        backgroundColor: 'black',
-      }}
-    />
-  );
+    return (
+        <canvas
+            ref={canvasRef}
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: 0,
+                backgroundColor: 'black',
+            }}
+        />
+    );
 };
 
 export default AnimatedBackground;
