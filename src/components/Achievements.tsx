@@ -9,16 +9,7 @@ const Achievements: React.FC = () => {
 
   const achievements = [
     {
-      title: (
-        <a 
-          href="https://vibeout-alpha.vercel.app/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-white underline hover:text-blue-400"
-        >
-          Vibeout
-        </a>
-      ),
+      title: "Vibeout",
       description: "Developed an application that analyzes users' emotions through facial expression detection and suggests tailored workout routines and nutrition.",
       points: [
         "Used AI and ML to train a model for scanning facial expressions and voice details.",
@@ -26,24 +17,17 @@ const Achievements: React.FC = () => {
         "Utilized React framework and Tailwind CSS for styling to create the web application.",
         "For future implementations, will also attach a band for variable things.",
       ],
+      link: "https://vibeout-alpha.vercel.app/",
     },
     {
-      title: (
-        <a 
-          href="https://os-project-p4gchfbc0-krish-kumars-projects-cfa5e03c.vercel.app/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-white underline hover:text-blue-400"
-        >
-          Survival Game
-        </a>
-      ),
+      title: "Survival Game",
       description: "Created a game that tracks user IP addresses and enhances player engagement through competitive features.",
       points: [
         "Implemented a leaderboard to track player scores.",
         "Added user authentication for personalized experiences.",
         "Introduced dynamic game environments for better engagement.",
       ],
+      link: "https://os-project-p4gchfbc0-krish-kumars-projects-cfa5e03c.vercel.app/",
     },
     {
       title: "Food Waste Consumption App",
@@ -89,6 +73,10 @@ const Achievements: React.FC = () => {
     setMousePosition({ x, y });
   };
 
+  const handleRedirect = (url: string) => {
+    window.open(url, "_blank");
+  };
+
   return (
     <motion.section
       onMouseMove={handleMouseMove}
@@ -104,28 +92,37 @@ const Achievements: React.FC = () => {
         transition: "transform 0.1s ease-out",
       }}
       className={cn(
-        "mx-auto w-full bg-gray-800 relative rounded-2xl overflow-hidden p-6 mb-6" // Whitish-black background
+        "mx-auto w-full bg-gray-800 relative rounded-2xl overflow-hidden p-6 mb-6"
       )}
     >
       <div
-        className="relative h-full [background-image:radial-gradient(88%_100%_at_top,rgba(255,255,255,0.1),rgba(255,255,255,0))] sm:mx-0 sm:rounded-2xl overflow-hidden" // Adjusted gradient for a subtler effect
+        className="relative h-full [background-image:radial-gradient(88%_100%_at_top,rgba(255,255,255,0.1),rgba(255,255,255,0))] sm:mx-0 sm:rounded-2xl overflow-hidden"
         style={{
           boxShadow:
             "0 10px 32px rgba(34, 42, 53, 0.12), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.05), 0 4px 6px rgba(34, 42, 53, 0.08), 0 24px 108px rgba(47, 48, 55, 0.10)",
         }}
       >
         <div className="h-full px-4 py-20">
-          <h2 className="text-3xl font-bold mb-4 text-white text-center">Achievements</h2> {/* Increased font size and made it bold */}
+          <h2 className="text-3xl font-bold mb-4 text-white text-center">Achievements</h2>
           <ul className="list-disc list-inside text-gray-300">
             {achievements.map((ach, index) => (
               <li key={index} className="mb-4">
-                <strong className="text-white">{ach.title}</strong> {/* Title in white for better visibility */}
+                <strong className="text-white">{ach.title}</strong>
                 <p>{ach.description}</p>
                 <ul className="list-disc list-inside ml-5">
                   {ach.points.map((point, pointIndex) => (
                     <li key={pointIndex}>{point}</li>
                   ))}
                 </ul>
+                {ach.link && (
+                  <button
+                    onClick={() => handleRedirect(ach.link)}
+                    className="mt-2 text-white underline hover:text-blue-400 z-10" // Added z-index for button
+                    style={{ pointerEvents: "auto" }} // Ensure pointer events are enabled
+                  >
+                    Visit Link
+                  </button>
+                )}
               </li>
             ))}
           </ul>

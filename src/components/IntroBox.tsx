@@ -1,13 +1,15 @@
 import React from 'react';
-import { TextGenerateEffect } from '../ui/text-generate-effect'; // Adjust the path if necessary
 
 const IntroBox: React.FC = () => {
   console.log("IntroBox rendered"); // Log to the console when the component renders
 
-  // Combine all the text you want to animate
-  const animatedText = `Hello 
-    I'm a passionate software developer... 
-    I enjoy working on web development, AI/ML, and game development.
+  // Combine all the text you want to display
+  const animatedText = `Hello! 
+    I'm a B.Tech 2nd-year Computer Science Engineering student. 
+    I am proficient in English, Telugu, Hindi, and French. 
+    I enjoy cooking, playing musical instruments, traveling, and discovering new things. 
+    I have experience in web development, AI, and ML. 
+    My interests include exploring the world and learning about diverse cultures.
   `;
 
   return (
@@ -16,21 +18,26 @@ const IntroBox: React.FC = () => {
       style={{ 
         position: 'relative', 
         zIndex: 10, 
-        backgroundColor: 'rgba(34, 34, 34, 0.8)' // Dark gray background for light black theme
+        backgroundColor: 'rgba(45, 45, 45, 0.9)' // Darker gray background to contrast with the outer container
       }} 
     > 
       {/* Outer transparent container */}
       <div 
-        className="text-white p-6 rounded-lg shadow-lg hover:bg-gray-600 transition duration-300" 
+        className="text-white p-6 rounded-lg shadow-lg hover:bg-gray-500 transition duration-300" 
         style={{ 
           position: 'relative', 
           zIndex: 20, 
-          backgroundColor: 'rgba(50, 50, 50, 0.9)' // Slightly lighter dark gray for inner container
+          backgroundColor: 'rgba(60, 60, 60, 0.95)' // Slightly lighter dark gray for inner container
         }} 
       > 
         {/* Inner transparent container */}
-        <h2 className="text-3xl font-bold">About Me</h2> {/* Heading with white text */}
-        <TextGenerateEffect words={animatedText.trim()} className="mt-4" duration={0.5} /> {/* Use duration for speed */}
+        <h2 className="text-4xl font-bold text-white">About Me</h2> {/* Increased font size for heading */}
+        {/* Text with a lighter shade */}
+        <p className="mt-4 text-lg" style={{
+          color: '#D1D1D1', // Light gray shade for body text
+        }}>
+          {animatedText}
+        </p>
       </div>
     </div>
   );

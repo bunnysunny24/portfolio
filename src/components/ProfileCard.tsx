@@ -1,12 +1,70 @@
 "use client";
 
 import { cn } from "../lib/utils"; // Ensure the path is correct
-import React, { createContext, useState, useRef } from "react";
+import React, { createContext, useState, useRef, useEffect } from "react";
+import { motion, stagger, useAnimate, useInView } from "framer-motion"; // Import framer-motion
 
 // Create context for mouse enter state
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined);
+
+// TypewriterEffect component
+const TypewriterEffect = ({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}) => {
+  const words = text.split(" ").map((word) => ({ text: word }));
+  const wordsArray = words.map((word) => {
+    return {
+      ...word,
+      text: word.text.split(""),
+    };
+  });
+
+  const [scope, animate] = useAnimate();
+  const isInView = useInView(scope);
+
+  useEffect(() => {
+    if (isInView) {
+      animate(
+        "span",
+        {
+          display: "inline-block",
+          opacity: 1,
+          width: "fit-content",
+        },
+        {
+          duration: 0.3,
+          delay: stagger(0.1),
+          ease: "easeInOut",
+        }
+      );
+    }
+  }, [isInView]);
+
+  return (
+    <motion.div ref={scope} className="inline">
+      {wordsArray.map((word, idx) => (
+        <div key={`word-${idx}`} className="inline-block">
+          {word.text.map((char, index) => (
+            <motion.span
+              initial={{ opacity: 0 }}
+              key={`char-${index}`}
+              className={cn("dark:text-white text-black")}
+            >
+              {char}
+            </motion.span>
+          ))}
+          &nbsp;
+        </div>
+      ))}
+    </motion.div>
+  );
+};
 
 // CardContainer component
 export const CardContainer = ({
@@ -116,15 +174,16 @@ const ProfileCard: React.FC = () => {
                   onMouseLeave={() => setIsHovered(false)}
                   className="relative" // Use a relative wrapper to handle the hover state
                 >
-                  <h1 className="text-4xl font-bold text-white mb-2 transition-opacity duration-200 ease-in-out">
+                  <h1 className="text-5xl font-bold text-white mb-2 transition-opacity duration-200 ease-in-out">
                     {isHovered ? "Hello, I'm bunnysunny24" : "Hello, I'm Dachapalli Bhavashesh"}
                   </h1>
-                  <p className="text-2xl text-gray-300 mb-2 transition-opacity duration-200 ease-in-out">
+                  <p className="text-3xl text-gray-300 mb-2 transition-opacity duration-200 ease-in-out">
                     Welcome to my portfolio!
                   </p>
-                  <p className="text-lg text-gray-400 transition-opacity duration-200 ease-in-out">
-                    I am an undergraduate student pursuing a degree in Computer Science and Engineering. Passionate about technology, I specialize in full-stack development, blending creativity with technical expertise to build innovative solutions.
-                  </p>
+                  <TypewriterEffect
+                    text="I am an undergraduate student pursuing a degree in Computer Science and Engineering. Passionate about technology, I specialize in full-stack development, blending creativity with technical expertise to build innovative solutions."
+                    className="text-xl text-gray-400 transition-opacity duration-200 ease-in-out"
+                  />
                 </div>
               </div>
 
